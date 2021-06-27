@@ -7,6 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="flink" />
+        <module name="hive" />
+        <module name="common-data" />
+        <module name="java" />
+        <module name="kafka" />
       </profile>
     </annotationProcessing>
   </component>

@@ -1,11 +1,19 @@
 package com.stu.utils;
 
+import com.mybigdata.constants.ParameterConfig;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
+import org.apache.flink.api.common.serialization.SerializationSchema;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer;
+import org.apache.flink.streaming.connectors.kafka.KafkaDeserializationSchema;
+import org.apache.flink.streaming.connectors.kafka.KafkaSerializationSchema;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.producer.ProducerConfig;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -43,13 +51,35 @@ public class FlinkUtils {
         return env.addSource(kafkaConsumer);
     }
 
-    public static StreamExecutionEnvironment getEnv(){
+    //    public static <T> FlinkKafkaConsumer<T> sourceKafka(String topic, String groupId, KafkaDeserializationSchema<T> deserializer,ParameterTool parameterTool){
+    public static <T> FlinkKafkaConsumer<T> sourceKafka(String topic, String groupId, Class<? extends DeserializationSchema<T>> clazz, ParameterTool parameterTool) throws IllegalAccessException, InstantiationException {
+        Properties properties = new Properties();
+        String serverAddress = parameterTool.get(ParameterConfig.sourceBootstrapServer);
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, serverAddress);
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        FlinkKafkaConsumer<T> kafkaConsumer = new FlinkKafkaConsumer<>(topic, clazz.newInstance(), properties);
+//        kafkaConsumer.setStartFromTimestamp();
+        return kafkaConsumer;
+    }
+
+    //    public static <T> FlinkKafkaProducer<T> sinkKafka(String topic, SerializationSchema<T> serializationSchema,ParameterTool parameterTool){
+    public static <T> FlinkKafkaProducer<T> sinkKafka(String topic, Class<? extends SerializationSchema<T>> clazz, ParameterTool parameterTool) throws IllegalAccessException, InstantiationException {
+        Properties properties = new Properties();
+        String serverAddress = parameterTool.get(ParameterConfig.sinkBootstrapServer);
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, serverAddress);
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, ParameterConfig.COMPRESSION_TYPE);
+        properties.put(ProducerConfig.RETRIES_CONFIG, 3);
+        return new FlinkKafkaProducer<T>(topic, clazz.newInstance(), properties);
+    }
+
+
+    public static StreamExecutionEnvironment getEnv() {
         return env;
     }
 
-        public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         ParameterTool parameterTool = ParameterTool.fromPropertiesFile(args[0]);
-
         String groupId = parameterTool.get("group.id");
         System.out.println(groupId);
     }

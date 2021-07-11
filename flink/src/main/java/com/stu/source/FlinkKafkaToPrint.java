@@ -1,5 +1,7 @@
 package com.stu.source;
 
+import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.system.SystemPropsKeys;
 import com.mybigdata.url.ResourceUrlUtils;
 import com.stu.utils.FlinkUtils;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;

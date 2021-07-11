@@ -16,10 +16,20 @@ public class kafkaDataProducer {
     private static final Logger logger = LoggerFactory.getLogger(kafkaDataProducer.class);
 
     public static void main(String[] args) {
+//        creatTopic("t12sink");
         String topic = "t12";
         KafkaProducer kafkaProducer = KafkaConfig.producerProps(topic);
-        String json = "dataaa";
-        ProducerRecord<String, String> kvProducerRecord = new ProducerRecord<>(topic, String.valueOf(json.hashCode()), json);
-        kafkaProducer.send(kvProducerRecord);
+        String json = "1q";
+        int i=0;
+        while (i<10000) {
+            i++;
+            ProducerRecord<String, String> kvProducerRecord = new ProducerRecord<>(topic, String.valueOf(json.hashCode()), json);
+            kafkaProducer.send(kvProducerRecord);
+        }
+
+    }
+
+    public static void creatTopic(String topic){
+        KafkaProducer kafkaProducer = KafkaConfig.producerProps(topic);
     }
 }

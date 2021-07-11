@@ -10,6 +10,7 @@
         <module name="hive" />
         <module name="common-data" />
         <module name="java" />
+        <module name="Hbase" />
         <module name="kafka" />
       </profile>
     </annotationProcessing>

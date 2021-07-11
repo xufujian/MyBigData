@@ -9,21 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.bigdata.kafka</groupId>
-    <artifactId>kafka</artifactId>
+    <artifactId>Hbase</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <kafka.version>0.11.0.1</kafka.version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
-            <version>${kafka.version}</version>
-        </dependency>
-    </dependencies>
 
 </project>

@@ -18,7 +18,7 @@ import java.util.Properties;
 public class KafkaDataConsumer {
 
     public static void main(String[] args) {
-        String topic = "t12sink";
+        String topic = "t12";
         KafkaConsumer kafkaConsumer = KafkaConfig.consumerProps(topic);
 
         while (true) {

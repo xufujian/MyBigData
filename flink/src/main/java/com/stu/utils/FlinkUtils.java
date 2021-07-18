@@ -37,10 +37,10 @@ public class FlinkUtils {
         props.setProperty("bootstrap.servers", parameters.getRequired("bootstrap.servers"));
         props.setProperty("group.id", parameters.getRequired("group.id"));
         //如果没有记录偏移量，第一次从最开始消费
-        props.setProperty("auto.offset.reset", parameters.get("auto.offset.reset", "earliest"));
+        props.setProperty("auto.offset.reset", parameters.get("auto.offset.reset", "lastest"));
         //kafka 的消费这不自动提交偏移量
         props.setProperty("enable.auto.commit", parameters.get("enable.auto.commit", "false"));
-        String topics = parameters.get("topics");
+        String topics = parameters.get("sourceTopic");
         List<String> topicList = Arrays.asList(topics.split(","));
         FlinkKafkaConsumer<T> kafkaConsumer = new FlinkKafkaConsumer<T>(
                 topicList,

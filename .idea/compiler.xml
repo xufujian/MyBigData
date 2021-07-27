@@ -10,8 +10,9 @@
         <module name="hive" />
         <module name="common-data" />
         <module name="java" />
-        <module name="Hbase" />
         <module name="kafka" />
+        <module name="Hbase" />
+        <module name="redis" />
       </profile>
     </annotationProcessing>
   </component>

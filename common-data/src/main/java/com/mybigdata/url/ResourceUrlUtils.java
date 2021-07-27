@@ -26,11 +26,15 @@ public class ResourceUrlUtils {
 
 
     public static void main(String[] args) {
-        String fileUrl = "/D:/own_project/MyBigdata/flink/target/classes/config.properties";
-        Setting setting = new Setting(new File(fileUrl), CharsetUtil.CHARSET_UTF_8, true);//fileUrl是对应文件的具体地址，如E:/code/f.setting
-        String uripush = setting.getStr("sendtype");//获取配置文件中的具体参数内容
-        String json111 = setting.getStr("input");
-        System.out.println(setting.getGroupedMap());
-        System.out.println(setting.get("bootstrap.servers"));
+//        String fileUrl = "/D:/own_project/MyBigdata/flink/target/classes/config.properties";
+//        Setting setting = new Setting(new File(fileUrl), CharsetUtil.CHARSET_UTF_8, true);//fileUrl是对应文件的具体地址，如E:/code/f.setting
+//        String uripush = setting.getStr("sendtype");//获取配置文件中的具体参数内容
+//        String json111 = setting.getStr("input");
+//        System.out.println(setting.getGroupedMap());
+//        System.out.println(setting.get("bootstrap.servers"));
+
+        String currentModuleConfigUrl = getCurrentModuleConfigUrl(ResourceUrlUtils.class, "config.properties");
+
+        System.out.println(currentModuleConfigUrl);
     }
 }

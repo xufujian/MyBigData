@@ -29,6 +29,9 @@ public class FlinkUtils {
     private static StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
     public static <T> DataStream<T> createKafkaStream(ParameterTool parameters, Class<? extends DeserializationSchema<T>> clazz) throws IllegalAccessException, InstantiationException {
+        //设置全局的参数
+        env.getConfig().setGlobalJobParameters(parameters);
+
         //开启checkpointing，同事开启重启策略
         env.enableCheckpointing(parameters.getLong("checkpoint.interval", 50000l));
         //取消任务checkpoint不删除

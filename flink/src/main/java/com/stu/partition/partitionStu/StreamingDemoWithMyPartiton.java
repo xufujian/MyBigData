@@ -34,7 +34,7 @@ public class StreamingDemoWithMyPartiton {
             }
         });
 
-//        maps.print().setParallelism(1);
+        maps.print().setParallelism(1);
         env.execute("own definite partiotn");
 
     }

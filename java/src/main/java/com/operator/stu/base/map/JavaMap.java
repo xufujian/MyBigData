@@ -38,7 +38,7 @@ public class JavaMap {
     public static void main(String[] args) {
         HashMap<String, Integer> map = new HashMap<>();
         int i = 0;
-        while (i < 10000000) {
+        while (i < 100) {
             i++;
             map.put("xu" + i, i);
         }
@@ -51,6 +51,14 @@ public class JavaMap {
         long end2 = System.currentTimeMillis();
         System.out.println("start -end iter:" + (end2 - start2));
 
+        System.out.println("------------------");
+        Map<String, String>  tMap = new HashMap<>();
+
+        System.out.println(tMap.put("xx","r"));
+
+        System.out.println(tMap.put("xx","tq"));
+
+        System.out.println(tMap.get("xx"));
     }
 
 }

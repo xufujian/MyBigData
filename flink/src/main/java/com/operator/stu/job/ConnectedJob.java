@@ -11,6 +11,7 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.CoMapFunction;
+import org.apache.flink.streaming.api.functions.co.KeyedCoProcessFunction;
 
 /**
  * @author: 今天风很大
@@ -26,8 +27,13 @@ public class ConnectedJob {
         //手动设置启动TaskExecutor的任务插槽的数量
         conf.setInteger(TaskManagerOptions.NUM_TASK_SLOTS, 2);
         // 创建本地执行环境，并行度为2
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(1, conf);
-        env.disableOperatorChaining();
+//        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(1, conf);
+
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        //4核8线程 默认8个并行度
+        System.out.println("default parallelism:"+env.getParallelism());
+
+       env.disableOperatorChaining();
         DataStreamSource<Integer> inStream = env.fromElements(1, 0, 9, 2, 3, 6);
 
         DataStreamSource<String> stringStream = env.fromElements("LOW", "HIGHT", "LOW", "FAT");
@@ -47,7 +53,9 @@ public class ConnectedJob {
             }
         });
 
+
         mapStream.print();
+
 
         env.execute(TestJob.class.getName());
     }

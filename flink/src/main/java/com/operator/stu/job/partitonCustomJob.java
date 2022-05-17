@@ -23,9 +23,9 @@ public class partitonCustomJob {
         //手动设置启动TaskExecutor的任务插槽的数量
         conf.setInteger(TaskManagerOptions.NUM_TASK_SLOTS, 2);
         // 创建本地执行环境，并行度为2
-//        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(1, conf);
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(1, conf);
 
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+//        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         //4核8线程 默认8个并行度
         System.out.println("default parallelism:" + env.getParallelism());
         env.setParallelism(6);

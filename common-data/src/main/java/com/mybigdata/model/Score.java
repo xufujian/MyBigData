@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * @Description: 学生分数类
  */
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Data
 public class Score {
     private String name;

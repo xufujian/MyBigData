@@ -1,10 +1,9 @@
 package com.operator.stu.job;
 
-import com.mybigdata.constants.ParameterConfig;
+import com.constant.ParameterConfig;
 import com.mybigdata.url.ResourceUrlUtils;
 import com.operator.stu.operator.CustomFilterFunction;
 import com.operator.stu.utils.FlinkUtils;
-import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;

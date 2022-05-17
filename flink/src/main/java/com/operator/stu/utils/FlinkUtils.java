@@ -1,6 +1,6 @@
 package com.operator.stu.utils;
 
-import com.mybigdata.constants.ParameterConfig;
+import com.constant.ParameterConfig;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.common.serialization.SerializationSchema;
 import org.apache.flink.api.java.utils.ParameterTool;
